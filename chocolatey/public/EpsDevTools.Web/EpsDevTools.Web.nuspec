@@ -13,7 +13,7 @@
     <copyright></copyright>
     <licenseUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <!--<iconUrl>https://github.com/__CHOCO_PKG_OWNER_REPO__/raw/master/__NAME__/__NAME__.gif</iconUrl>-->
+    <iconUrl>https://raw.github.com/EastPoint/DevTools/master/eps-logo.png</iconUrl>
     <dependencies>
       <dependency id="toolsroot"/>
       <dependency id="7zip.install"/>
