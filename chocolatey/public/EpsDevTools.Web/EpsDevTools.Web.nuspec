@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EpsDevTools.Web</id>
+    <title>EpsDevTools.Web</title>
+    <version>0.0.3</version>
+    <authors>EPS</authors>
+    <owners>East Point Systems</owners>
+    <summary>This will insall the standard EPS dev tools.</summary>
+    <description>This will insall the standard EPS dev tools.</description>
+    <projectUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</projectUrl>
+    <tags>EPS DEV</tags>
+    <copyright></copyright>
+    <licenseUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--<iconUrl>https://github.com/__CHOCO_PKG_OWNER_REPO__/raw/master/__NAME__/__NAME__.gif</iconUrl>-->
+    <dependencies>
+      <dependency id="toolsroot"/>
+      <dependency id="7zip.install"/>
+      <dependency id="PowerShell" version="3.0"/>
+      <dependency id="curl"/>
+<!--      <dependency id="Console2"/>  Error: "External packages cannot depend on packages that target projects." (Installing in powershell script.) -->
+<!--      <dependency id="ConEmu" version="12.4.17.1"/> --> <!-- Seems to be prompting for install directory -->   <!-- latest version is alpha -->
+      <dependency id="SublimeText2.app"/>
+      <dependency id="Growl"/>
+      <dependency id="nodejs.install"/>
+      <dependency id="gitextensions"/>
+      <dependency id="PhantomJS"/>
+      <dependency id="OptiPNG"/>
+      <dependency id="libjpeg-turbo"/>
+      <dependency id="GoogleChrome.Canary"/>
+      <dependency id="javaruntime"/>
+      <dependency id="diffmerge"/>
+      <!-- <dependency id="git.difftool.diffmerge"/>  Error: "External packages cannot depend on packages that target projects." -->
+      <dependency id="SourceCodePro"/>
+      <dependency id="Tunnelier"/>
+      <dependency id="Ruby" version="1.9.3"/>
+    </dependencies>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <!--<file src="content\**" target="content" />-->
+  </files>
+</package>
