@@ -8,6 +8,14 @@ try {
   # See here for more info: http://nuget.codeplex.com/workitem/595
   cinst Console2
 
+  # install required NPM packages
+  npm install -g coffee-script
+  npm install -g coffeelint
+  npm install -g bower
+  npm install -g grunt-cli
+  npm install -g http-server
+  npm install -g jshint
+
   # install required gems
   gem update --system
   gem install bundler
@@ -40,5 +48,5 @@ try {
   Write-ChocolateySuccess 'EpsDevTools'
 } catch {
   Write-ChocolateyFailure 'EpsDevTools' $($_.Exception.Message)
-  throw 
+  throw
 }
