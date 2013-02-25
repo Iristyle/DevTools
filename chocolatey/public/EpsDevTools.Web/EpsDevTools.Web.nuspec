@@ -3,11 +3,11 @@
   <metadata>
     <id>EpsDevTools.Web</id>
     <title>EpsDevTools.Web</title>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <authors>EPS</authors>
     <owners>East Point Systems</owners>
-    <summary>This will insall the standard EPS dev tools.</summary>
-    <description>This will insall the standard EPS dev tools.</description>
+    <summary>This will insall the standard EPS web dev tools.</summary>
+    <description>This will insall the standard EPS web dev tools.</description>
     <projectUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</projectUrl>
     <tags>EPS DEV</tags>
     <copyright></copyright>
@@ -39,7 +39,12 @@
       <dependency id="Ruby" version="1.9.3"/>
       <dependency id="Vagrant"/>
     </dependencies>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+      Also installs: Console2 (can't use as a dependency due to Nuget issue)
+      For Ruby: Bundler, Capistrano
+      For Node: coffee-script coffeelint bower grunt-cli http-server jshint
+      Configures DiffMerge as merge tool
+    </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
