@@ -3,15 +3,15 @@
   <metadata>
     <id>EpsDevTools.Web</id>
     <title>EpsDevTools.Web</title>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <authors>EPS</authors>
     <owners>East Point Systems</owners>
     <summary>This will insall the standard EPS web dev tools.</summary>
     <description>This will insall the standard EPS web dev tools.</description>
-    <projectUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</projectUrl>
-    <tags>EPS DEV</tags>
+    <projectUrl>https://github.com/EastPoint/DevTools/tree/master/chocolatey/public/EpsDevTools.Web</projectUrl>
+    <tags>EPS development</tags>
     <copyright></copyright>
-    <licenseUrl>https://github.com/EastPoint/3rdParty/ChocolateyPackages/EpsDevTools.Web</licenseUrl>
+    <licenseUrl>https://raw.github.com/EastPoint/DevTools/master/LICENSE.md</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/EastPoint/DevTools/master/eps-logo.png</iconUrl>
     <dependencies>
