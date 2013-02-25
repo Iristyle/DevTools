@@ -25,6 +25,7 @@
       <dependency id="Growl"/>
       <dependency id="nodejs.install"/>
       <dependency id="gitextensions"/>
+      <dependency id="poshgit"/>
       <dependency id="PhantomJS"/>
       <dependency id="OptiPNG"/>
       <dependency id="libjpeg-turbo"/>
@@ -33,8 +34,10 @@
       <dependency id="diffmerge"/>
       <!-- <dependency id="git.difftool.diffmerge"/>  Error: "External packages cannot depend on packages that target projects." -->
       <dependency id="SourceCodePro"/>
+      <dependency id="MesloLG.DZ"/>
       <dependency id="Tunnelier"/>
       <dependency id="Ruby" version="1.9.3"/>
+      <dependency id="Vagrant"/>
     </dependencies>
     <releaseNotes></releaseNotes>
   </metadata>
