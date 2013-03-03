@@ -1,0 +1,96 @@
+server {
+  server_name     _;
+
+  # disable caching since this is a development server
+  expires             0;
+  add_header          Cache-Control private;
+  proxy_no_cache      1;
+  proxy_cache_bypass  1;
+
+  keepalive_timeout 30;
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+
+  add_header "X-UA-Compatible" "IE=Edge,chrome=1";
+
+  #enable stats page
+  location /nginx_status {
+    stub_status on;
+    access_log off;
+  }
+
+  # TODO: this works, but requests to /_plugin/head/ do not
+  location /elasticsearch {
+    access_log              /var/log/nginx/elasticsearch-access.log;
+    error_log               /var/log/nginx/elasticsearch-error.log;
+
+    proxy_pass              http://127.0.0.1:9200/;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_redirect          off;
+  }
+
+  # TODO: not working because commander doesn't know its running under /redis
+  location /redis {
+    access_log              /var/log/nginx/redis-access.log;
+    error_log               /var/log/nginx/redis-error.log;
+
+    #proxy to RedisCommander
+    # https://github.com/nearinfinity/redis-commander
+    proxy_pass              http://127.0.0.1:8081/;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_redirect          off;
+  }
+
+  # TODO: not working because the IP has to be the one from ifconfig
+  location /riak {
+    access_log              /var/log/nginx/riak-access.log;
+    error_log               /var/log/nginx/riak-error.log;
+
+    # proxy to Riak
+    proxy_pass              http://127.0.0.1:8098/;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_redirect          off;
+  }
+
+  # HACK: appears ServiceStack has issue under Mono finding swagger-ui on disk
+  location /api/swagger-ui {
+    access_log /opt/marketplace-api/shared/log/nginx.marketplace-api.access.log;
+    error_log /opt/marketplace-api/shared/log/nginx.marketplace-api.error.log debug;
+
+    alias /opt/marketplace-api/current/swagger-ui;
+  }
+
+  # For any request, ensure CORS has matching origin header
+  add_header 'Access-Control-Allow-Origin' $http_origin;
+
+  location /api {
+    access_log /opt/marketplace-api/shared/log/nginx.marketplace-api.access.log;
+    error_log /opt/marketplace-api/shared/log/nginx.marketplace-api.error.log debug;
+
+    # https://github.com/ServiceStack/ServiceStack/wiki/Run-ServiceStack-in-Fastcgi-hosted-on-nginx
+    root /opt/marketplace-api/current/public;
+    fastcgi_index   /api;
+    fastcgi_pass unix:/tmp/SOCK-marketplace-api;
+    include /etc/nginx/fastcgi_params;
+
+    # HACK: something is causing ServiceStack / ASP.Net -> Mono -> FastCGI
+    # to encode 'deflate' again, so force request to disallow gzip or deflate
+    fastcgi_param HTTP_ACCEPT_ENCODING "";
+  }
+
+  location /
+  {
+    access_log /opt/marketplace-web/shared/log/nginx.marketplace-web.access.log;
+    error_log /opt/marketplace-web/shared/log/nginx.marketplace-web.error.log debug;
+    root /opt/marketplace-web/current;
+  }
+}

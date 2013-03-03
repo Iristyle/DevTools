@@ -3,3 +3,4 @@ syntax: glob
 .nuget\*
 *.nupkg
 *.exe
+chocolatey/private/EpsDevVagrantVM.Web/tools/modules/*
