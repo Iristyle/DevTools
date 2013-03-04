@@ -1,0 +1,15 @@
+[submodule "chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/riak"]
+	path = chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/riak
+	url = https://github.com/basho/puppet-riak
+[submodule "chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/stdlib"]
+	path = chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib
+[submodule "chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/wget"]
+	path = chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/wget
+	url = https://github.com/maestrodev/puppet-wget
+[submodule "chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/gcc"]
+	path = chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/gcc
+	url = https://github.com/puppetlabs/puppetlabs-gcc
+[submodule "chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/redis"]
+	path = chocolatey/private/Vagrant.EPS.Marketplace/tools/modules/redis
+	url = https://github.com/logicalparadox/puppet-redis
