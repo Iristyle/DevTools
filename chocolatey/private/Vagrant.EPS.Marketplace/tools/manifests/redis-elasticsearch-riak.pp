@@ -104,6 +104,36 @@ class rediscommander {
   }
 }
 
+class fakes3 {
+  $fakes3_path = '/opt/fakes3'
+  $fakes3_port = 4568
+
+  package { 'fakes3':
+    ensure   => '0.1.5',
+    provider => 'gem',
+  }
+
+  file { $fakes3_path : ensure => "directory" }
+
+  file { "$fakes3_path/Procfile" :
+    source => '/tmp/vagrant-puppet/manifests/fakes3/Procfile',
+    require => Package['fakes3'],
+  }
+
+  exec { 'foreman-export-fakes3' :
+    cwd     => $fakes3_path,
+    command => "nf export -t upstart -o /etc/init -a fakes3 -p $fakes3_port -u vagrant -l /var/log/upstart/fakes3.log",
+    notify  => Service["fakes3"],
+    path    => ['/usr/bin', '/bin'],
+    require => File["$fakes3_path/Procfile"],
+  }
+
+  service { 'fakes3' :
+    ensure => 'running',
+    enable => true,
+  }
+}
+
 class marketusers {
   group { 'deployers' : ensure => present }
   group { 'market-web' : ensure => present }
@@ -174,6 +204,7 @@ class {'elasticsearch':}
 class {'elasticsearch-head':}
 class {'elasticsearch-bigdesk':}
 class {'rediscommander':}
+class {'fakes3':}
 class {'marketusers':}
 class {'marketpaths':}
 class {'nginx-config':}
