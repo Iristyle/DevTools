@@ -38,6 +38,7 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 9300, 9300 # ElasticSearch
   config.vm.forward_port 80, 9090   # Nginx
   config.vm.forward_port 4568, 4568 # FakeS3
+  config.vm.forward_port 9324, 9324 # ElasticMQ
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the

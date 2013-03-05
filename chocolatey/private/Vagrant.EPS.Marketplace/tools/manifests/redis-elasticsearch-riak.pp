@@ -73,6 +73,18 @@ redis::service { 'redis_6379':
   port   => '6379'
 }
 
+class { 'elasticmq':
+  elasticmq_ver => '0.6.3'
+}
+
+elasticmq::service { 'elasticmq_9324':
+  # HACK: NGinx listens on 9324 until new version of elasticmq
+  # and proxies to elasticmq 9323
+  # https://github.com/adamw/elasticmq/pull/4
+  bind_port   => '9323',
+  port        => '9324'
+}
+
 class rediscommander {
   $commander_path = '/opt/rediscommander'
 

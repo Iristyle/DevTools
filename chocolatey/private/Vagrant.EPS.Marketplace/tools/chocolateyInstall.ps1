@@ -42,6 +42,7 @@ function Add-FirewallExclusions
   netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9300 action=allow
   netsh advfirewall firewall add rule name="EPS-Market-VM-NGinx" dir=in protocol=tcp localport=9090 action=allow
   netsh advfirewall firewall add rule name="EPS-Market-VM-FakeS3" dir=in protocol=tcp localport=4568 action=allow
+  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticMQ" dir=in protocol=tcp localport=9324 action=allow
 }
 
 function Test-RestPath
@@ -137,6 +138,12 @@ function Test-VirtualMachineConnections
   @{
     Url = 'http://localhost:4568';
     FailMessage = 'Fake S3 not responding on port 4568';
+  },
+
+  ### ElasticMQ
+  @{
+    Url = 'http://localhost:9324/?Action=ListQueues';
+    FailMessage = 'ElasticMQ not responding on port 9324';
   } |
     % { Test-RestPath @_ }
 }
@@ -191,6 +198,7 @@ ElasticSearch BigDesk                        http://localhost:9200/_plugin/bigde
 Redis                $redisVersion   6379 / 6379
 Redis Commander      0.0.6    8081 / 8081    http://localhost:8081
 FakeS3               0.1.5    4568 / 4568    http://localhost:4568
+ElasticMQ            0.6.3    9324 / 9324    http://localhost:9324
 Mono                 3.0.1
 Mono-xsp4            2.10-1
 Mono-fastcgi-server4 2.10-1
