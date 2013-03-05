@@ -3,7 +3,7 @@
   <metadata>
     <id>Vagrant.EPS.Marketplace</id>
     <title>Vagrant.EPS.Marketplace</title>
-    <version>0.1.12</version>
+    <version>0.2.0</version>
     <authors>EPS</authors>
     <owners>East Point Systems</owners>
     <summary>Installs the Vagrant VM necessary for the marketplace.</summary>
