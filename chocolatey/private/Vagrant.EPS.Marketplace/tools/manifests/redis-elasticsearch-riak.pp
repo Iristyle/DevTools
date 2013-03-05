@@ -73,6 +73,18 @@ redis::service { 'redis_6379':
   port   => '6379'
 }
 
+class { 'elasticmq':
+  elasticmq_ver => '0.6.3'
+}
+
+elasticmq::service { 'elasticmq_9324':
+  # HACK: NGinx listens on 9324 until new version of elasticmq
+  # and proxies to elasticmq 9323
+  # https://github.com/adamw/elasticmq/pull/4
+  bind_port   => '9323',
+  port        => '9324'
+}
+
 class rediscommander {
   $commander_path = '/opt/rediscommander'
 
@@ -99,6 +111,36 @@ class rediscommander {
   }
 
   service { 'rediscommander' :
+    ensure => 'running',
+    enable => true,
+  }
+}
+
+class fakes3 {
+  $fakes3_path = '/opt/fakes3'
+  $fakes3_port = 4568
+
+  package { 'fakes3':
+    ensure   => '0.1.5',
+    provider => 'gem',
+  }
+
+  file { $fakes3_path : ensure => "directory" }
+
+  file { "$fakes3_path/Procfile" :
+    source => '/tmp/vagrant-puppet/manifests/fakes3/Procfile',
+    require => Package['fakes3'],
+  }
+
+  exec { 'foreman-export-fakes3' :
+    cwd     => $fakes3_path,
+    command => "nf export -t upstart -o /etc/init -a fakes3 -p $fakes3_port -u vagrant -l /var/log/upstart/fakes3.log",
+    notify  => Service["fakes3"],
+    path    => ['/usr/bin', '/bin'],
+    require => File["$fakes3_path/Procfile"],
+  }
+
+  service { 'fakes3' :
     ensure => 'running',
     enable => true,
   }
@@ -174,6 +216,7 @@ class {'elasticsearch':}
 class {'elasticsearch-head':}
 class {'elasticsearch-bigdesk':}
 class {'rediscommander':}
+class {'fakes3':}
 class {'marketusers':}
 class {'marketpaths':}
 class {'nginx-config':}

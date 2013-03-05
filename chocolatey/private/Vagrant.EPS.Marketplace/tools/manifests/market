@@ -94,3 +94,24 @@ server {
     root /opt/marketplace-web/current;
   }
 }
+
+# HACK: NGinx listens on 9324 until new version of elasticmq
+# https://github.com/adamw/elasticmq/pull/4
+server {
+  listen          9324;
+  server_name        _;
+
+  location / {
+    access_log              /var/log/nginx/elasticmq-access.log;
+    error_log               /var/log/nginx/elasticmq-error.log;
+
+    proxy_pass              http://127.0.0.1:9323/;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    sub_filter              '2009-02-01' '2012-11-05';
+    sub_filter_once         off;
+    sub_filter_types        'text/plain';
+  }
+}
