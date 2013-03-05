@@ -1,6 +1,8 @@
 # must match whats in the Vagrantfile
 $packageName = 'Vagrant.EPS.Marketplace'
 $boxName = 'ubuntu-12.04.2-server-amd64-market'
+$vagrantPath = "$Env:SystemDrive\vagrant\bin"
+$rubyPath = "$Env:SystemDrive\ruby193\bin"
 $virtualBoxPath = "$Env:ProgramFiles\Oracle\VirtualBox"
 $elasticSearchVersion = '0.20.5'
 $redisVersion = '2.6.10'
@@ -13,6 +15,12 @@ function Get-CurrentDirectory
   [IO.Path]::GetDirectoryName((Get-Content function:$thisName).File)
 }
 
+function Which([string]$cmd)
+{
+  Get-Command -ErrorAction SilentlyContinue $cmd |
+    Select -ExpandProperty Definition
+}
+
 function Test-Administrator
 {
   $user = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -20,15 +28,33 @@ function Test-Administrator
   (New-Object Security.Principal.WindowsPrincipal $user).IsInRole($adminRole)
 }
 
-function Test-VirtualBoxPathConfigured
+function Test-CommandConfigured
 {
-  return (($Env:PATH -split ';') -icontains $virtualBoxPath)
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Name
+  )
+
+  $path = Which $Name
+  if ($path) { Write-Host "$Name found at $path" }
+
+  return ($path -eq $null)
 }
 
-function Add-VirtualBoxToPath
+function Add-ToPath
 {
-  $systemPath = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
-  [Environment]::SetEnvironmentVariable('PATH', "$systemPath;$virtualBoxPath", 'Machine')
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Path
+  )
+
+  $userPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+  [Environment]::SetEnvironmentVariable('PATH', "$userPath;$Path", 'User')
+  $Env:PATH += ";$Path"
 }
 
 function Add-FirewallExclusions
@@ -153,10 +179,34 @@ try {
   if (Test-Administrator) { Add-FirewallExclusions } `
   else { Write-Warning 'Manually add firewall exclusions for ports 8098, 8087, 6379, 8081, 9200, 9300 and 9090' }
 
-  if (!(Test-VirtualBoxPathConfigured))
+  if (!(Test-CommandConfigured 'Vagrant'))
   {
-    if (Test-Administrator) { Add-VirtualBoxToPath } `
-    else { Write-Warning 'If VBoxManage cannot be found, reinstall this package as admin with -force '}
+    Add-ToPath $vagrantPath
+    Add-ToPath $rubyPath
+
+    if (!(Which vagrant))
+    {
+      Write-Error @"
+Vagrant cannot be found.
+
+* Ensure the Vagrant package is installed with cinst Vagrant -force
+* Reinstall this package with cinst $packageName -force
+"@
+    }
+  }
+
+  if (!(Test-CommandConfigured 'VBoxManage'))
+  {
+    Add-ToPath $virtualBoxPath
+    if (!(Which VBoxManage))
+    {
+      Write-Error @"
+VBoxManage cannot be found.
+
+* Ensure VirtualBox package is installed with cinst VirtualBox -force
+* Reinstall this package with cinst $packageName -force
+"@
+    }
   }
 
   if (!(Test-Path $installPath)) { New-Item $installPath -Type Directory}

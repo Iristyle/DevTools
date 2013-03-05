@@ -22,7 +22,6 @@
       <dependency id="vagrant" version="1.0.10" />
     </dependencies>
     <releaseNotes>
-      Assumes that the EpsDevTools.Web package is installed first.
       Copies the appropriate basebox and upgrades it using Vagrant tooling
       Includes:
       Mono                  3.0.1
