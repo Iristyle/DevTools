@@ -1,6 +1,8 @@
 # must match whats in the Vagrantfile
 $packageName = 'Vagrant.EPS.Marketplace'
 $boxName = 'ubuntu-12.04.2-server-amd64-market'
+$vagrantPath = "$Env:SystemDrive\vagrant\bin"
+$rubyPath = "$Env:SystemDrive\ruby193\bin"
 $virtualBoxPath = "$Env:ProgramFiles\Oracle\VirtualBox"
 $elasticSearchVersion = '0.20.5'
 $redisVersion = '2.6.10'
@@ -13,6 +15,12 @@ function Get-CurrentDirectory
   [IO.Path]::GetDirectoryName((Get-Content function:$thisName).File)
 }
 
+function Which([string]$cmd)
+{
+  Get-Command -ErrorAction SilentlyContinue $cmd |
+    Select -ExpandProperty Definition
+}
+
 function Test-Administrator
 {
   $user = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -20,15 +28,33 @@ function Test-Administrator
   (New-Object Security.Principal.WindowsPrincipal $user).IsInRole($adminRole)
 }
 
-function Test-VirtualBoxPathConfigured
+function Test-CommandConfigured
 {
-  return (($Env:PATH -split ';') -icontains $virtualBoxPath)
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Name
+  )
+
+  $path = Which $Name
+  if ($path) { Write-Host "$Name found at $path" }
+
+  return ($path -eq $null)
 }
 
-function Add-VirtualBoxToPath
+function Add-ToPath
 {
-  $systemPath = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
-  [Environment]::SetEnvironmentVariable('PATH', "$systemPath;$virtualBoxPath", 'Machine')
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Path
+  )
+
+  $userPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+  [Environment]::SetEnvironmentVariable('PATH', "$userPath;$Path", 'User')
+  $Env:PATH += ";$Path"
 }
 
 function Add-FirewallExclusions
@@ -41,6 +67,8 @@ function Add-FirewallExclusions
   netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9200 action=allow
   netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9300 action=allow
   netsh advfirewall firewall add rule name="EPS-Market-VM-NGinx" dir=in protocol=tcp localport=9090 action=allow
+  netsh advfirewall firewall add rule name="EPS-Market-VM-FakeS3" dir=in protocol=tcp localport=4568 action=allow
+  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticMQ" dir=in protocol=tcp localport=9324 action=allow
 }
 
 function Test-RestPath
@@ -130,7 +158,19 @@ function Test-VirtualMachineConnections
     };
     FailMessage = "Riak Core and Control must respond and be version $riakVersion"
   },
-  @{Url = 'http://localhost:8098/admin'} |
+  @{Url = 'http://localhost:8098/admin'},
+
+  ### Fake S3
+  @{
+    Url = 'http://localhost:4568';
+    FailMessage = 'Fake S3 not responding on port 4568';
+  },
+
+  ### ElasticMQ
+  @{
+    Url = 'http://localhost:9324/?Action=ListQueues';
+    FailMessage = 'ElasticMQ not responding on port 9324';
+  } |
     % { Test-RestPath @_ }
 }
 
@@ -139,10 +179,34 @@ try {
   if (Test-Administrator) { Add-FirewallExclusions } `
   else { Write-Warning 'Manually add firewall exclusions for ports 8098, 8087, 6379, 8081, 9200, 9300 and 9090' }
 
-  if (!(Test-VirtualBoxPathConfigured))
+  if (!(Test-CommandConfigured 'Vagrant'))
   {
-    if (Test-Administrator) { Add-VirtualBoxToPath } `
-    else { Write-Warning 'If VBoxManage cannot be found, reinstall this package as admin with -force '}
+    Add-ToPath $vagrantPath
+    Add-ToPath $rubyPath
+
+    if (!(Which vagrant))
+    {
+      Write-Error @"
+Vagrant cannot be found.
+
+* Ensure the Vagrant package is installed with cinst Vagrant -force
+* Reinstall this package with cinst $packageName -force
+"@
+    }
+  }
+
+  if (!(Test-CommandConfigured 'VBoxManage'))
+  {
+    Add-ToPath $virtualBoxPath
+    if (!(Which VBoxManage))
+    {
+      Write-Error @"
+VBoxManage cannot be found.
+
+* Ensure VirtualBox package is installed with cinst VirtualBox -force
+* Reinstall this package with cinst $packageName -force
+"@
+    }
   }
 
   if (!(Test-Path $installPath)) { New-Item $installPath -Type Directory}
@@ -183,6 +247,8 @@ ElasticSearch Head                           http://localhost:9200/_plugin/head/
 ElasticSearch BigDesk                        http://localhost:9200/_plugin/bigdesk/
 Redis                $redisVersion   6379 / 6379
 Redis Commander      0.0.6    8081 / 8081    http://localhost:8081
+FakeS3               0.1.5    4568 / 4568    http://localhost:4568
+ElasticMQ            0.6.3    9324 / 9324    http://localhost:9324
 Mono                 3.0.1
 Mono-xsp4            2.10-1
 Mono-fastcgi-server4 2.10-1

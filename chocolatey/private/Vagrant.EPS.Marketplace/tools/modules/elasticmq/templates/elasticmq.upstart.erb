@@ -1,0 +1,8 @@
+description "elasticmq server <%= port %>"
+
+start on runlevel [23]
+stop on shutdown
+
+exec sudo -u elasticmq /opt/elasticmq/bin/run.sh
+
+respawn

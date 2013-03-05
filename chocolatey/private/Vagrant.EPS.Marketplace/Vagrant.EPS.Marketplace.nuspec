@@ -3,7 +3,7 @@
   <metadata>
     <id>Vagrant.EPS.Marketplace</id>
     <title>Vagrant.EPS.Marketplace</title>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <authors>EPS</authors>
     <owners>East Point Systems</owners>
     <summary>Installs the Vagrant VM necessary for the marketplace.</summary>
@@ -22,7 +22,6 @@
       <dependency id="vagrant" version="1.0.10" />
     </dependencies>
     <releaseNotes>
-      Assumes that the EpsDevTools.Web package is installed first.
       Copies the appropriate basebox and upgrades it using Vagrant tooling
       Includes:
       Mono                  3.0.1
@@ -38,6 +37,8 @@
       NPM                   1.2.11
       Ruby                  1.9.3-p385
       Puppet                3.1.0
+      FakeS3                0.1.5
+      ElasticMQ             0.6.3
     </releaseNotes>
   </metadata>
   <files>
