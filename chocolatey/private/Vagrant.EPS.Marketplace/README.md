@@ -2,6 +2,7 @@
 
 ### Installed Services
 
+```
 Service             Version   Mapped Port    Url
 
 NGinx                1.2.7    80   / 9090    http://localhost:9090
@@ -25,7 +26,7 @@ NPM                  1.2.11
 Ruby                 1.9.3-p385
 RubyGems             1.8.25
 Puppet               3.1.0
-
+```
 
 #### Local Installation Directory
 
@@ -35,6 +36,8 @@ $ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace
 
 ### Accessing with SSH
 
- address: `localhost:2222`
-    user: `vagrant`
-key file: `$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\vagrant`
+```
+ address: localhost:2222
+    user: vagrant
+key file: $ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\vagrant
+```
