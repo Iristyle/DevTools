@@ -22,6 +22,10 @@
 <!--      <dependency id="Console2"/>  Error: "External packages cannot depend on packages that target projects." (Installing in powershell script.) -->
 <!--      <dependency id="ConEmu" version="12.4.17.1"/> --> <!-- Seems to be prompting for install directory -->   <!-- latest version is alpha -->
       <dependency id="SublimeText2.app"/>
+      <dependency id="EthanBrown.SublimeText2.UtilPackages"/>
+      <dependency id="EthanBrown.SublimeText2.EditorPackages"/>
+      <dependency id="EthanBrown.SublimeText2.GitPackages"/>
+      <dependency id="EthanBrown.SublimeText2.WebPackages"/>
       <dependency id="Growl"/>
       <dependency id="nodejs.install"/>
       <dependency id="gitextensions"/>
