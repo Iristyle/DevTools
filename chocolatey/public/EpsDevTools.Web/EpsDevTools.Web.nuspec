@@ -27,7 +27,7 @@
       <dependency id="EthanBrown.SublimeText2.GitPackages"/>
       <dependency id="EthanBrown.SublimeText2.WebPackages"/>
       <dependency id="Growl"/>
-      <dependency id="nodejs.install"/>
+      <dependency id="nodejs.install" version="(,0.8.22]"/>
       <dependency id="gitextensions"/>
       <dependency id="poshgit"/>
       <dependency id="PhantomJS"/>
