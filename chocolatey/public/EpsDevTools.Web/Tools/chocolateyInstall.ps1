@@ -21,30 +21,6 @@ try {
   gem install bundler
   gem install capistrano
 
-  # Set up git diff/merge tool
-  git config --global mergetool.diffmerge.cmd '\"C:\Program Files\SourceGear\Common\DiffMerge\sgdm.exe\" --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" --title1=\"Mine\" --title2=\"Merging to: $MERGED\" --title3=\"Theirs\"'
-  git config --global mergetool.diffmerge.trustExitCode true
-  git config --global difftool.diffmerge.cmd '\"C:\Program Files\SourceGear\Common\DiffMerge\sgdm.exe\"  \"$LOCAL\" \"$REMOTE\" --title1=\"Previous Version ($LOCAL)\" --title2=\"Current Version ($REMOTE)\"'
-
-  $defaultMerge = git config --get merge.tool
-  if (!$defaultMerge)
-  {
-    git config --global merge.tool diffmerge
-    git config --global mergetool.keepBackup false
-  }
-
-  $defaultDiff = git config --get diff.tool
-  if (!$defaultDiff)
-  {
-    git config --global diff.tool diffmerge
-  }
-
-  $defaultPush = git config --get push.default
-  if (!$defaultPush)
-  {
-    git config --global push.default simple
-  }
-
   Write-ChocolateySuccess 'EpsDevTools'
 } catch {
   Write-ChocolateyFailure 'EpsDevTools' $($_.Exception.Message)

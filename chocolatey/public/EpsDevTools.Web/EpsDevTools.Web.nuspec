@@ -30,6 +30,8 @@
       <dependency id="nodejs.install" version="(,0.8.22]"/>
       <dependency id="gitextensions"/>
       <dependency id="poshgit"/>
+      <dependency id="EthanBrown.GitConfiguration"/>
+      <dependency id="EthanBrown.GitAliases"/>
       <dependency id="PhantomJS"/>
       <dependency id="OptiPNG"/>
       <dependency id="libjpeg-turbo"/>
@@ -47,7 +49,11 @@
       Also installs: Console2 (can't use as a dependency due to Nuget issue)
       For Ruby: Bundler, Capistrano
       For Node: coffee-script coffeelint bower grunt-cli http-server jshint
-      Configures DiffMerge as merge tool
+      Configures a number of Git settings, such as Notepad++ for
+      commit editor, DiffMerge as diff / merge tool, and core.autocrlf
+      to true.
+
+      Additionally includes a number of very useful Git aliases.
     </releaseNotes>
   </metadata>
   <files>
