@@ -48,7 +48,8 @@
     <releaseNotes>
       Also installs: Console2 (can't use as a dependency due to Nuget issue)
       For Ruby: Bundler, Capistrano
-      For Node: coffee-script coffeelint bower grunt-cli http-server jshint
+      For Node: coffee-script coffeelint bower grunt-cli http-server jshint codo recess csslint
+
       Configures a number of Git settings, such as Notepad++ for
       commit editor, DiffMerge as diff / merge tool, and core.autocrlf
       to true.

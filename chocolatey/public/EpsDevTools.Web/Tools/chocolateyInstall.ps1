@@ -9,12 +9,19 @@ try {
   cinst Console2
 
   # install required NPM packages
-  npm install -g coffee-script
-  npm install -g coffeelint
-  npm install -g bower
-  npm install -g grunt-cli
-  npm install -g http-server
-  npm install -g jshint
+  $packages = @(
+    'coffee-script@1.4.0',
+    'coffeelint@0.5.4',
+    'bower@0.8.5',
+    'grunt-cli@0.1.6',
+    'http-server@0.5.3',
+    'jshint@1.1.0',
+    'codo@1.5.6',
+    'recess@1.1.6',
+    'csslint@0.9.10'
+  )
+
+  npm install -g $packages
 
   # install required gems
   gem update --system
