@@ -236,7 +236,7 @@ VBoxManage cannot be found.
     Select -ExpandProperty Count
   $dotVagrantExists = Test-Path '.vagrant'
 
-  if ($dotVagrantExists -and (!$boxRegistered))
+  if ($dotVagrantExists -and ($boxRegistered -eq 0))
   {
     Write-Warning ".vagrant file found, but box not registered in Vagrant!"
   }
