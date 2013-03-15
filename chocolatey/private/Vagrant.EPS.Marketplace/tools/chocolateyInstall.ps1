@@ -57,18 +57,35 @@ function Add-ToPath
   $Env:PATH += ";$Path"
 }
 
+function Add-FirewallPortExclusion
+{
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Name,
+
+    [Parameter(Mandatory = $true)]
+    [int]
+    $Port
+  )
+
+  Write-Host "Adding firewall port $Port exclusion for $Name"
+  netsh advfirewall firewall add rule name="$Name" dir=in protocol=tcp localport=$Port action=allow
+}
+
 function Add-FirewallExclusions
 {
   Write-Host "Registering Marketplace VM firewall exclusions"
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Riak-Http" dir=in protocol=tcp localport=8098 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Riak-ProtoBuf" dir=in protocol=tcp localport=8087 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Redis" dir=in protocol=tcp localport=6379 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Redis-Commander" dir=in protocol=tcp localport=8081 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9200 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9300 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-NGinx" dir=in protocol=tcp localport=9090 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-FakeS3" dir=in protocol=tcp localport=4568 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticMQ" dir=in protocol=tcp localport=9324 action=allow
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Riak-Http" -Port 8098
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Riak-ProtoBuf" -Port 8087
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Redis" -Port 6379
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Redis-Commander" -Port 8081
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticSearch" -Port 9200
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticSearch" -Port 9300
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-NGinx" -Port 9090
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-FakeS3" -Port 4568
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticMQ" -Port 9324
 }
 
 function Test-RestPath
