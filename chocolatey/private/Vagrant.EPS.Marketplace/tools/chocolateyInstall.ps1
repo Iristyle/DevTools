@@ -15,6 +15,8 @@ function Get-CurrentDirectory
   [IO.Path]::GetDirectoryName((Get-Content function:$thisName).File)
 }
 
+. (Join-Path (Get-CurrentDirectory) 'WindowsHelpers.ps1')
+
 function Which([string]$cmd)
 {
   Get-Command -ErrorAction SilentlyContinue $cmd |
@@ -225,6 +227,28 @@ VBoxManage cannot be found.
 "@
     }
   }
+
+  if (Test-Administrator)
+  {
+    $params = @{
+      Name = 'EPS Marketplace VM Startup';
+      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\start.bat";
+    }
+    Register-WindowsUserLoginScript @params
+
+    # http://docs-v1.vagrantup.com/v1/docs/getting-started/teardown.html
+    $params = @{
+      Name = 'EPS Marketplace VM Safe Shutdown';
+      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\shutdown.bat";
+    }
+    Register-WindowsUserLogoffScript @params
+  }
+  else
+  {
+    Write-Warning 'VM safe shutdown / start on reboot scripts could not be registered!'
+    Write-Warning 'Reinstall this package in an admin prompt with the -force switch'
+  }
+
 
   if (!(Test-Path $installPath)) { New-Item $installPath -Type Directory}
   Push-Location $installPath
