@@ -15,6 +15,8 @@ function Get-CurrentDirectory
   [IO.Path]::GetDirectoryName((Get-Content function:$thisName).File)
 }
 
+. (Join-Path (Get-CurrentDirectory) 'WindowsHelpers.ps1')
+
 function Which([string]$cmd)
 {
   Get-Command -ErrorAction SilentlyContinue $cmd |
@@ -57,18 +59,35 @@ function Add-ToPath
   $Env:PATH += ";$Path"
 }
 
+function Add-FirewallPortExclusion
+{
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]
+    $Name,
+
+    [Parameter(Mandatory = $true)]
+    [int]
+    $Port
+  )
+
+  Write-Host "Adding firewall port $Port exclusion for $Name"
+  netsh advfirewall firewall add rule name="$Name" dir=in protocol=tcp localport=$Port action=allow
+}
+
 function Add-FirewallExclusions
 {
   Write-Host "Registering Marketplace VM firewall exclusions"
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Riak-Http" dir=in protocol=tcp localport=8098 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Riak-ProtoBuf" dir=in protocol=tcp localport=8087 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Redis" dir=in protocol=tcp localport=6379 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-Redis-Commander" dir=in protocol=tcp localport=8081 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9200 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticSearch" dir=in protocol=tcp localport=9300 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-NGinx" dir=in protocol=tcp localport=9090 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-FakeS3" dir=in protocol=tcp localport=4568 action=allow
-  netsh advfirewall firewall add rule name="EPS-Market-VM-ElasticMQ" dir=in protocol=tcp localport=9324 action=allow
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Riak-Http" -Port 8098
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Riak-ProtoBuf" -Port 8087
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Redis" -Port 6379
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-Redis-Commander" -Port 8081
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticSearch" -Port 9200
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticSearch" -Port 9300
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-NGinx" -Port 9090
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-FakeS3" -Port 4568
+  Add-FirewallPortExclusion -Name "EPS-Market-VM-ElasticMQ" -Port 9324
 }
 
 function Test-RestPath
@@ -209,6 +228,28 @@ VBoxManage cannot be found.
     }
   }
 
+  if (Test-Administrator)
+  {
+    $params = @{
+      Name = 'EPS Marketplace VM Startup';
+      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\start.bat";
+    }
+    Register-WindowsUserLoginScript @params
+
+    # http://docs-v1.vagrantup.com/v1/docs/getting-started/teardown.html
+    $params = @{
+      Name = 'EPS Marketplace VM Safe Shutdown';
+      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\shutdown.bat";
+    }
+    Register-WindowsUserLogoffScript @params
+  }
+  else
+  {
+    Write-Warning 'VM safe shutdown / start on reboot scripts could not be registered!'
+    Write-Warning 'Reinstall this package in an admin prompt with the -force switch'
+  }
+
+
   if (!(Test-Path $installPath)) { New-Item $installPath -Type Directory}
   Push-Location $installPath
   Copy-Item "$(Get-CurrentDirectory)\*" -Recurse -Force
@@ -219,15 +260,23 @@ VBoxManage cannot be found.
     Select -ExpandProperty Count
   $dotVagrantExists = Test-Path '.vagrant'
 
-  if ($dotVagrantExists -and (!$boxRegistered))
+  if ($dotVagrantExists -and ($boxRegistered -eq 0))
   {
     Write-Warning ".vagrant file found, but box not registered in Vagrant!"
   }
 
-  if ($dotVagrantExists) { vagrant reload } `
-  else { vagrant up  }
-
-  Write-ChocolateySuccess $packageName
+  if ($dotVagrantExists)
+  {
+    Write-Host "Attemping to reload VM with new settings..."
+     vagrant reload | Tee-Object -Variable vagrantOutput
+  }
+  else
+  {
+    Write-Host "Attemping to start VM for first time..."
+    vagrant up | Tee-Object -Variable vagrantOutput
+  }
+  $vagrantError = $vagrantOutput |
+    ? { $_ -is [Management.Automation.ErrorRecord] }
 
 $installDetails = @"
 Congratulations!
@@ -276,6 +325,34 @@ http://stackoverflow.com/q/11424690/87793
   Write-Host $installDetails
 
   Test-VirtualMachineConnections
+
+  if ($vagrantOutput -match 'VM not created')
+  {
+    # NOTE: want to use $LASTEXITCODE to see if VM started, but Vagrant doesn't emit one
+    Write-ChocolateyFailure $packageName @"
+Due to a Vagrant / VirtualBox bug, the VM cannot be updated or started.
+
+While all the connections may have tested correctly above, they are liking using
+outdated versions of the VM software.
+
+Please reboot the machine, and reinstall this packge with the -force switch.
+"@
+  }
+  elseif ($vagrantError)
+  {
+    Write-ChocolateyFailure $packageName @"
+An unexpected Vagrant or VirtualBox error occurred.
+
+While all the connections may have tested correctly above, they are liking using
+outdated versions of the VM software.
+
+Please reboot the machine, and reinstall this packge with the -force switch.
+"@
+  }
+  else
+  {
+    Write-ChocolateySuccess $packageName
+  }
 } catch {
   Write-ChocolateyFailure $packageName $($_.Exception.Message)
   throw
