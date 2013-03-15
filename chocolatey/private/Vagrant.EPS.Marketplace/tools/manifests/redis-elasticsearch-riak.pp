@@ -10,6 +10,8 @@ class { 'riak':
   cfg => {
     riak_kv => {
       storage_backend => '__atom_riak_kv_eleveldb_backend'
+      map_js_vm_count => 24,
+      reduce_js_vm_count => 24
     },
     riak_control => {
       enabled => true,
