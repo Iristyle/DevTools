@@ -241,10 +241,18 @@ VBoxManage cannot be found.
     Write-Warning ".vagrant file found, but box not registered in Vagrant!"
   }
 
-  if ($dotVagrantExists) { vagrant reload } `
-  else { vagrant up  }
-
-  Write-ChocolateySuccess $packageName
+  if ($dotVagrantExists)
+  {
+    Write-Host "Attemping to reload VM with new settings..."
+     vagrant reload | Tee-Object -Variable vagrantOutput
+  }
+  else
+  {
+    Write-Host "Attemping to start VM for first time..."
+    vagrant up | Tee-Object -Variable vagrantOutput
+  }
+  $vagrantError = $vagrantOutput |
+    ? { $_ -is [Management.Automation.ErrorRecord] }
 
 $installDetails = @"
 Congratulations!
@@ -293,6 +301,34 @@ http://stackoverflow.com/q/11424690/87793
   Write-Host $installDetails
 
   Test-VirtualMachineConnections
+
+  if ($vagrantOutput -match 'VM not created')
+  {
+    # NOTE: want to use $LASTEXITCODE to see if VM started, but Vagrant doesn't emit one
+    Write-ChocolateyFailure $packageName @"
+Due to a Vagrant / VirtualBox bug, the VM cannot be updated or started.
+
+While all the connections may have tested correctly above, they are liking using
+outdated versions of the VM software.
+
+Please reboot the machine, and reinstall this packge with the -force switch.
+"@
+  }
+  elseif ($vagrantError)
+  {
+    Write-ChocolateyFailure $packageName @"
+An unexpected Vagrant or VirtualBox error occurred.
+
+While all the connections may have tested correctly above, they are liking using
+outdated versions of the VM software.
+
+Please reboot the machine, and reinstall this packge with the -force switch.
+"@
+  }
+  else
+  {
+    Write-ChocolateySuccess $packageName
+  }
 } catch {
   Write-ChocolateyFailure $packageName $($_.Exception.Message)
   throw
