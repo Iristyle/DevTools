@@ -9,7 +9,7 @@ class { 'riak':
   version => '1.3.0',
   cfg => {
     riak_kv => {
-      storage_backend => '__atom_riak_kv_eleveldb_backend'
+      storage_backend => '__atom_riak_kv_eleveldb_backend',
       map_js_vm_count => 24,
       reduce_js_vm_count => 24
     },
