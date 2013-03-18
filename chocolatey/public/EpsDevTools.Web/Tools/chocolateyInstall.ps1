@@ -27,6 +27,7 @@ try {
   gem update --system
   gem install bundler
   gem install capistrano
+  gem install twig
 
   Write-ChocolateySuccess 'EpsDevTools'
 } catch {
