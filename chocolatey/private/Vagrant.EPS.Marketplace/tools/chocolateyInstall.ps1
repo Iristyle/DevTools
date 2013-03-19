@@ -191,6 +191,23 @@ function Test-VirtualMachineConnections
     FailMessage = 'ElasticMQ not responding on port 9324';
   } |
     % { Test-RestPath @_ }
+
+  ### Check Redis port
+  try {
+    $client = New-Object Net.Sockets.TcpClient('localhost', 6379)
+    $stream = $client.GetStream()
+    $bytes = [Text.Encoding]::ASCII.GetBytes("PING`r`n")
+    $stream.Write($bytes, 0, $bytes.Length)
+    $buffer = New-Object byte[] 8
+    $read = $stream.Read($buffer, 0, $buffer.Length)
+    $response = [Text.Encoding]::ASCII.GetChars($buffer) -join ''
+    if ($response -inotmatch '^\+PONG') { throw "Bad response: $response" }
+    Write-Host "Succesfully connected to Redis on localhost:6379 (PING response: $($response.Trim()))"
+  }
+  catch [System.Exception]
+  {
+    Write-Warning "Failed to connect to Redis on localhost:6379 `n$($_.Exception.Message)"
+  }
 }
 
 try {
