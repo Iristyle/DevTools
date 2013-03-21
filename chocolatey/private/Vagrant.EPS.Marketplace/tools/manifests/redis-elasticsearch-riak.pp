@@ -66,13 +66,6 @@ class elasticsearch-bigdesk {
   }
 }
 
-# HACK: use exec, yuck
-# waiting for https://github.com/logicalparadox/puppet-redis/pull/3
-exec { 'stop-redis' :
-  command => 'service redis-server-6379 stop',
-  path => ['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin'],
-}
-
 # https://github.com/logicalparadox/puppet-redis
 class { 'redis':
   redis_ver => '2.6.10',
@@ -81,7 +74,6 @@ class { 'redis':
 redis::service { 'redis_6379':
   config_bind => '0.0.0.0',
   port   => '6379',
-  require => Exec['stop-redis'],
 }
 
 class { 'elasticmq':
