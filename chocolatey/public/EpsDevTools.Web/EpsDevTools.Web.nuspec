@@ -19,6 +19,7 @@
       <dependency id="7zip.install"/>
       <dependency id="PowerShell" version="3.0"/>
       <dependency id="curl"/>
+      <dependency id="nodejs.install" version="(,0.8.22]"/>
 <!--      <dependency id="Console2"/>  Error: "External packages cannot depend on packages that target projects." (Installing in powershell script.) -->
 <!--      <dependency id="ConEmu" version="12.4.17.1"/> --> <!-- Seems to be prompting for install directory -->   <!-- latest version is alpha -->
       <dependency id="SublimeText2.app"/>
@@ -27,7 +28,6 @@
       <dependency id="EthanBrown.SublimeText2.GitPackages"/>
       <dependency id="EthanBrown.SublimeText2.WebPackages"/>
       <dependency id="Growl"/>
-      <dependency id="nodejs.install" version="(,0.8.22]"/>
       <dependency id="gitextensions"/>
       <dependency id="EthanBrown.GitExtensionsConfiguration"/>
       <dependency id="poshgit"/>
@@ -37,7 +37,6 @@
       <dependency id="OptiPNG"/>
       <dependency id="libjpeg-turbo"/>
       <dependency id="GoogleChrome.Canary"/>
-      <dependency id="javaruntime"/>
       <dependency id="diffmerge"/>
       <!-- <dependency id="git.difftool.diffmerge"/>  Error: "External packages cannot depend on packages that target projects." -->
       <dependency id="SourceCodePro"/>
