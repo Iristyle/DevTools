@@ -73,6 +73,8 @@ function Add-FirewallPortExclusion
   )
 
   Write-Host "Adding firewall port $Port exclusion for $Name"
+
+  netsh advfirewall firewall delete rule name="$Name" | Out-Null
   netsh advfirewall firewall add rule name="$Name" dir=in protocol=tcp localport=$Port action=allow
 }
 
