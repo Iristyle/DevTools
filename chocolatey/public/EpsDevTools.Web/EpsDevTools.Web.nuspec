@@ -44,6 +44,7 @@
       <dependency id="libjpeg-turbo"/>
       <dependency id="Tunnelier"/>
       <dependency id="Ruby" version="1.9.3"/>
+      <dependency id="ruby.devkit"/>
       <dependency id="Vagrant"/>
     </dependencies>
     <releaseNotes>
