@@ -34,6 +34,7 @@
       <dependency id="PhantomJS"/>
       <dependency id="FireFox"/>
       <dependency id="GoogleChrome.Canary"/>
+      <dependency id="EthanBrown.ChromeCanaryDevExtensions"/>
       <dependency id="SublimeText2.app"/>
       <dependency id="EthanBrown.SublimeText2.UtilPackages"/>
       <dependency id="EthanBrown.SublimeText2.EditorPackages"/>
