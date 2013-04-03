@@ -16,7 +16,7 @@ try {
     'grunt-cli@0.1.6',
     'http-server@0.5.3',
     'jshint@1.1.0',
-    'codo@1.5.6',
+    'codo@1.6.0',
     'recess@1.1.6',
     'csslint@0.9.10'
   )
