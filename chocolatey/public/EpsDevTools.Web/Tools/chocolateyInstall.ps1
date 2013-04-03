@@ -10,7 +10,7 @@ try {
 
   # install required NPM packages
   $packages = @(
-    'coffee-script@1.4.0',
+    'coffee-script@1.6.2',
     'coffeelint@0.5.4',
     'bower@0.8.5',
     'grunt-cli@0.1.6',
