@@ -6,7 +6,7 @@ try {
   # To work around this, we just install the packages as part of our
   # script.
   # See here for more info: http://nuget.codeplex.com/workitem/595
-  cinst Console2
+  cinst Console2 -version 2.0.148
 
   # install required NPM packages
   $packages = @(

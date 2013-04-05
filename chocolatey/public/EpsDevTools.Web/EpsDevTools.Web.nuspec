@@ -17,36 +17,39 @@
     <dependencies>
       <dependency id="toolsroot"/>
       <dependency id="7zip.install"/>
-      <dependency id="SourceCodePro"/>
-      <dependency id="MesloLG.DZ"/>
+      <dependency id="SourceCodePro" version="1.017.1"/>
+      <dependency id="MesloLG.DZ" version="1.00"/>
       <dependency id="PowerShell" version="3.0"/>
-      <dependency id="curl"/>
+      <dependency id="curl" version="7.28.1"/>
       <dependency id="nodejs.install" version="[0.8.22,0.8.22]"/>
-      <dependency id="gitextensions"/>
-      <dependency id="EthanBrown.GitAliases"/>
-      <dependency id="EthanBrown.GitExtensionsConfiguration"/>
-      <dependency id="poshgit"/>
-      <dependency id="diffmerge"/>
+      <dependency id="gitextensions" version="2.4.4"/>
+      <dependency id="EthanBrown.GitAliases" version="0.0.3"/>
+      <dependency id="EthanBrown.GitExtensionsConfiguration" version="0.0.1"/>
+      <!-- automatically installs latest from git zipball -->
+      <dependency id="poshgit" version="0.4.0.20120717"/>
+      <dependency id="diffmerge" version="3.3.2"/>
       <!-- <dependency id="git.difftool.diffmerge"/>  Error: "External packages cannot depend on packages that target projects." -->
-      <dependency id="EthanBrown.GitConfiguration"/>
+      <dependency id="EthanBrown.GitConfiguration" version="0.0.3"/>
 <!--      <dependency id="Console2"/>  Error: "External packages cannot depend on packages that target projects." (Installing in powershell script.) -->
 <!--      <dependency id="ConEmu" version="12.4.17.1"/> --> <!-- Seems to be prompting for install directory -->   <!-- latest version is alpha -->
-      <dependency id="PhantomJS"/>
-      <dependency id="FireFox"/>
-      <dependency id="GoogleChrome.Canary"/>
-      <dependency id="EthanBrown.ChromeCanaryDevExtensions"/>
-      <dependency id="SublimeText2.app"/>
-      <dependency id="EthanBrown.SublimeText2.UtilPackages"/>
-      <dependency id="EthanBrown.SublimeText2.EditorPackages"/>
-      <dependency id="EthanBrown.SublimeText2.GitPackages"/>
-      <dependency id="EthanBrown.SublimeText2.WebPackages"/>
+      <dependency id="PhantomJS" version="1.9.0"/>
+      <dependency id="FireFox" version="19.0.2"/>
+      <dependency id="GoogleChrome.Canary" version="28.0.1461.0"/>
+      <dependency id="EthanBrown.ChromeCanaryDevExtensions" version="0.0.2"/>
+      <dependency id="SublimeText2.app" version="2.0.1.22171"/>
+      <dependency id="EthanBrown.SublimeText2.UtilPackages" version="0.1.0"/>
+      <dependency id="EthanBrown.SublimeText2.EditorPackages" version="0.1.0"/>
+      <dependency id="EthanBrown.SublimeText2.GitPackages" version="0.1.0"/>
+      <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.1.0"/>
+      <!-- temporarily disable growl until we can do official win8 patch
       <dependency id="Growl"/>
-      <dependency id="OptiPNG"/>
-      <dependency id="libjpeg-turbo"/>
-      <dependency id="Tunnelier"/>
-      <dependency id="Ruby" version="1.9.3"/>
-      <dependency id="ruby.devkit"/>
-      <dependency id="Vagrant"/>
+      -->
+      <dependency id="OptiPNG" version="0.7.1.20120913"/>
+      <dependency id="libjpeg-turbo" version="1.2.1.20130404"/>
+      <dependency id="Tunnelier" version="4.60.0"/>
+      <dependency id="Ruby" version="1.9.3.37400"/>
+      <dependency id="ruby.devkit" version="4.5.2.20111230"/>
+      <dependency id="Vagrant" version="1.1.5"/>
     </dependencies>
     <releaseNotes>
       Also installs: Console2 (can't use as a dependency due to Nuget issue)
