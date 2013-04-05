@@ -3,7 +3,7 @@
   <metadata>
     <id>EpsDevTools.Web</id>
     <title>EpsDevTools.Web</title>
-    <version>0.3.0</version>
+    <version>0.3.2</version>
     <authors>EPS</authors>
     <owners>East Point Systems</owners>
     <summary>This will insall the standard EPS web dev tools.</summary>
