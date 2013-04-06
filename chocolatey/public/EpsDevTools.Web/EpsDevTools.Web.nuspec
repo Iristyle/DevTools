@@ -41,9 +41,7 @@
       <dependency id="EthanBrown.SublimeText2.EditorPackages" version="0.1.0"/>
       <dependency id="EthanBrown.SublimeText2.GitPackages" version="0.1.0"/>
       <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.1.0"/>
-      <!-- temporarily disable growl until we can do official win8 patch
-      <dependency id="Growl"/>
-      -->
+      <dependency id="Growl" version="2.0.9.20130406"/>
       <dependency id="OptiPNG" version="0.7.1.20120913"/>
       <dependency id="libjpeg-turbo" version="1.2.1.20130404"/>
       <dependency id="Tunnelier" version="4.60.0"/>
