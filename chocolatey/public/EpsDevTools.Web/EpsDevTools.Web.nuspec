@@ -37,13 +37,13 @@
       <dependency id="GoogleChrome.Canary" version="28.0.1461.0"/>
       <dependency id="EthanBrown.ChromeCanaryDevExtensions" version="0.0.2"/>
       <dependency id="SublimeText2.app" version="2.0.1.22171"/>
-      <dependency id="EthanBrown.SublimeText2.UtilPackages" version="0.1.0"/>
+      <dependency id="EthanBrown.SublimeText2.UtilPackages" version="0.1.1"/>
       <dependency id="EthanBrown.SublimeText2.EditorPackages" version="0.1.0"/>
       <dependency id="EthanBrown.SublimeText2.GitPackages" version="0.1.0"/>
-      <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.1.0"/>
+      <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.1.1"/>
       <dependency id="Growl" version="2.0.9.20130406"/>
       <dependency id="OptiPNG" version="0.7.1.20120913"/>
-      <dependency id="libjpeg-turbo" version="1.2.1.20130404"/>
+      <dependency id="libjpeg-turbo" version="1.2.1.201304081"/>
       <dependency id="Tunnelier" version="4.60.0"/>
       <dependency id="Ruby" version="1.9.3.37400"/>
       <dependency id="ruby.devkit" version="4.5.2.20111230"/>
