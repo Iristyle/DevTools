@@ -1,5 +1,13 @@
 try {
 
+  # simulate the unix command for finding things in path
+  # http://stackoverflow.com/questions/63805/equivalent-of-nix-which-command-in-powershell
+  function Which([string]$cmd)
+  {
+    Get-Command -ErrorAction "SilentlyContinue" $cmd |
+      Select -ExpandProperty Definition
+  }
+
   # Some packages wont work as a dependency. When you try to use them,
   # you get the following error:
   # "External packages cannot depend on packages that target projects."
@@ -21,7 +29,26 @@ try {
     'csslint@0.9.10'
   )
 
-  npm install -g $packages
+  $npmDefault = Join-Path $Env:ProgramFiles 'nodejs\npm.cmd'
+  $npm = (Which npm),
+    $npmDefault |
+    ? { Test-Path $_ } |
+    Select -First 1
+
+  if ($npm)
+  {
+    &$npm install -g $packages
+  }
+  else
+  {
+    $msg = @"
+Could not find NodeJS NPM to install global packages:
+Please install these packages in a command prompt that has access to npm.cmd
+
+npm install -g $packages
+"@
+  Write-Warning $msg
+  }
 
   # install required gems
   gem update --system
