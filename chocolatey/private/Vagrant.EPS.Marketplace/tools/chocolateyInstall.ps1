@@ -213,9 +213,17 @@ function Test-VirtualMachineConnections
 }
 
 try {
+  if (!(Test-Administrator))
+  {
+    throw @"
+This package must be run as an Administrator.
+
+* Ensure the Vagrant package is installed with cinst Vagrant -force
+* Reinstall this package with cinst $packageName -force
+"@
+  }
   # HACK: must be run as admin (Start-ChocolateyProcessAsAdmin won't work well)
-  if (Test-Administrator) { Add-FirewallExclusions } `
-  else { Write-Warning 'Manually add firewall exclusions for ports 8098, 8087, 6379, 8081, 9200, 9300 and 9090' }
+  Add-FirewallExclusions
 
   if (!(Test-CommandConfigured 'Vagrant'))
   {
@@ -247,27 +255,18 @@ VBoxManage cannot be found.
     }
   }
 
-  if (Test-Administrator)
-  {
-    $params = @{
-      Name = 'EPS Marketplace VM Startup';
-      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\start.bat";
-    }
-    Register-WindowsUserLoginScript @params
-
-    # http://docs-v1.vagrantup.com/v1/docs/getting-started/teardown.html
-    $params = @{
-      Name = 'EPS Marketplace VM Safe Shutdown';
-      Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\shutdown.bat";
-    }
-    Register-WindowsUserLogoffScript @params
+  $params = @{
+    Name = 'EPS Marketplace VM Startup';
+    Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\start.bat";
   }
-  else
-  {
-    Write-Warning 'VM safe shutdown / start on reboot scripts could not be registered!'
-    Write-Warning 'Reinstall this package in an admin prompt with the -force switch'
-  }
+  Register-WindowsUserLoginScript @params
 
+  # http://docs-v1.vagrantup.com/v1/docs/getting-started/teardown.html
+  $params = @{
+    Name = 'EPS Marketplace VM Safe Shutdown';
+    Path = "$ENV:LOCALAPPDATA\Vagrant\EPS.Marketplace\shutdown.bat";
+  }
+  Register-WindowsUserLogoffScript @params
 
   if (!(Test-Path $installPath)) { New-Item $installPath -Type Directory}
   Push-Location $installPath
