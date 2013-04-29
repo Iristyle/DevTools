@@ -133,6 +133,9 @@ function Test-VirtualMachineConnections
   ### NGinx Stats Page
   @{ Url = 'http://localhost:9090/nginx_status'},
 
+  ### EPS Dash
+  @{ Url = 'http://localhost:9090/dash/index.html'},
+
   ### Redis
   @{
     Url = 'http://localhost:8081/apiv1/server/info';
@@ -305,6 +308,7 @@ Service             Version   Mapped Port    Url
 
 NGinx                1.2.7    80   / 9090    http://localhost:9090
                                              http://localhost:9090/nginx_status
+  EPS Dash                                   http://localhost:9090/dash/index.html
 Riak (HTTP)          $riakVersion    8098 / 8098    http://localhost:8098
 Riak (ProtoBuf)               8087 / 8087
 RiakControl                                  http://localhost:8098/admin

@@ -93,6 +93,14 @@ server {
     error_log /opt/marketplace-web/shared/log/nginx.marketplace-web.error.log debug;
     root /opt/marketplace-web/current;
   }
+
+  location /dash/
+  {
+    access_log /opt/dashboard/log/nginx.dashboard.access.log;
+    error_log /opt/dashboard/log/nginx.dashboard.error.log debug;
+    alias /opt/dashboard/;
+    index index.html;
+  }
 }
 
 # HACK: NGinx listens on 9324 until new version of elasticmq

@@ -193,6 +193,18 @@ class marketpaths {
   }
 }
 
+class dashboard {
+  file { '/opt/dashboard' :
+    source => '/tmp/vagrant-puppet/manifests/dashboard',
+    mode => 2755,
+    recurse => true
+  }
+
+  file { '/opt/dashboard/log' :
+    ensure => "directory"
+  }
+}
+
 class nginx-config {
   file { '/etc/nginx/conf.d/default.conf' :
     notify  => Service["nginx"],
@@ -222,4 +234,5 @@ class {'rediscommander':}
 class {'fakes3':}
 class {'marketusers':}
 class {'marketpaths':}
+class {'dashboard':}
 class {'nginx-config':}

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>East Point Systems, Marketplace VM!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <style type="text/css">
+    body { min-width: 1240px; }
+    a { target-new:tab ! important; }
+  </style>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+             <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">Market</a>
+            <div class="nav-collapse collapse navbar-responsive-collapse">
+              <ul class="nav">
+                <li class="active">
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="http://localhost:9090" target="_blank">VM Demo</a>
+                </li>
+                <li>
+                  <a href="http://localhost:9090/api" target="_blank">VM Demo API</a>
+                </li>
+                <li>
+                  <a href="http://demo.marketplace.eastpointsystems.com" target="_blank">EC2 Demo</a>
+                </li>
+                <li>
+                  <a href="http://demo.api.marketplace.eastpointsystems.com" target="_blank">EC2 Demo API</a>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+                <li class="dropdown">
+                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Project Resources<strong class="caret"></strong></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="https://bugs.eastpointsystems.com/browse/FCWEB#selectedTab=com.atlassian.jira.plugin.system.project%3Aissues-panel" target="_blank">Issues</a>
+                    </li>
+                    <li>
+                      <a href="https://wiki.eastpointsystems.com/display/fcweb/Home" target="_blank">Wiki</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li class="nav-header">
+                      Code
+                    </li>
+                    <li>
+                      <a href="https://github.com/EastPoint/Osiris" target="_blank">Web UI Code (Osiris)</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/EastPoint/Ptah" target="_blank">API Code (Ptah)</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="page-header">
+        <h1>
+          Marketplace VM <small>One stop production environment shopping!</small>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://docs.basho.com/riak/latest/" target="_blank"><img src="img/riak.jpg" height="80" width="235"/></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>1.3.0</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="https://github.com/basho/riak/blob/riak-1.3.0/RELEASE-NOTES.md" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://docs.basho.com/riak/latest/" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/DistributedNonsense/CorrugatedIron/" target="_blank">Corrugated Iron Client</a></td>
+              <td><a class="btn btn-primary btn-small" href="http://corrugatediron.org/documentation/Basics.Querying.html" target="_blank">Docs »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTTP</td>
+              <td>8098</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:8098" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td>Protobuf</td>
+              <td>8087</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><a href="http://basho.com/riak-control/" target="_blank">Riak Control</a></td>
+              <td>8098</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:8098/admin" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td>Stats</td>
+              <td>8098</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:8098/stats" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://redis.io/commands" target="_blank"><img src="img/redis.jpg" height="80" width="241"></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>2.6.10</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="https://raw.github.com/antirez/redis/2.6/00-RELEASENOTES" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://redis.io/commands" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="http://www.servicestack.net/" target="_blank">ServiceStack Client</a></td>
+              <td><a class="btn btn-primary btn-small" href="https://github.com/ServiceStack/ServiceStack.Redis" target="_blank">Docs »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TCP</td>
+              <td>6379</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/nearinfinity/redis-commander" target="_blank">Commander</a></td>
+              <td>8081</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:8081" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://www.elasticsearch.org/guide/" target="_blank"><img src="img/elasticsearch.jpg" height="80" width="258"></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>0.20.5</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://www.elasticsearch.org/downloads/version-0-20-5/" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://www.elasticsearch.org/guide/" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Mpdreamz/NEST" target="_blank">NEST Client</a></td>
+              <td><a class="btn btn-primary btn-small" href="http://nest.azurewebsites.net/" target="_blank">Docs »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTTP</td>
+              <td>9200</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:9200" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td>TCP</td>
+              <td>9300</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><a href="http://mobz.github.io/elasticsearch-head/" target="_blank">Head</a></td>
+              <td>9200</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:9200/_plugin/head/" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="http://bigdesk.org/" target="_blank">BigDesk</a></td>
+              <td>9200</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:9200/_plugin/bigdesk/" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://aws.amazon.com/sqs/" target="_blank"><img src="img/sqs.jpg" height="80" width="220" /></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>ElasticMQ 0.6.3</strong>
+                <br>
+                <small>* provides SQS API for local integration tests</small>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="https://github.com/adamw/elasticmq#version-063-21-january-2013" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical API Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Welcome.html" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/aws/aws-sdk-net" target="_blank">AWS SDK for .NET</a></td>
+              <td><a class="btn btn-primary btn-small" href="http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_SQS.htm" target="_blank">Docs »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTTP</td>
+              <td>9324</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:9324/?Action=ListQueues" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://aws.amazon.com/s3/" target="_blank"><img src="img/s3.jpg" height="80" width="319" /></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>FakeS3 0.1.5</strong>
+                <br>
+                <small>* provides S3 API for local integration tests</small>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="https://github.com/jubos/fake-s3/wiki/Supported-Clients" target="_blank">Docs »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical API Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/aws/aws-sdk-net" target="_blank">AWS SDK for .NET</a></td>
+              <td><a class="btn btn-primary btn-small" href="http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_S3.htm" target="_blank">Docs »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTTP</td>
+              <td>4568</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:4568" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://wiki.nginx.org/Main" target="_blank"><img src="img/nginx.jpg" height="80" width="354"></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>1.2.7</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://nginx.org/en/CHANGES-1.2" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Offical Docs</td>
+              <td><a class="btn btn-primary btn-small" href="http://wiki.nginx.org/Configuration" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Compiled with modules:
+          <ul>
+            <li><a href="http://wiki.nginx.org/Modules#Standard_HTTP_modules" target="_blank">all standard modules</a></li>
+            <li><a href="http://wiki.nginx.org/HttpSslModule" target="_blank">http_ssl_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpRealipModule" target="_blank">http_realip_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpAdditionModule" target="_blank">http_addition_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpSubModule" target="_blank">http_sub_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpDavModule" target="_blank">http_dav_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpFlvModule" target="_blank">http_flv_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpMp4Module" target="_blank">http_mp4_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpGzipStaticModule" target="_blank">http_gzip_static_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpRandomIndexModule" target="_blank">http_random_index_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpSecureLinkModule" target="_blank">http_secure_link_module </a></li>
+            <li><a href="http://wiki.nginx.org/HttpStubStatusModule" target="_blank">http_stub_status_module </a></li>
+            <li><a href="http://wiki.nginx.org/MailSslModule" target="_blank">mail_ssl_module</a></li>
+          </ul>
+        </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTTP</td>
+              <td>9090</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>9090</td>
+              <td><a class="btn btn-primary btn-small" href="http://localhost:9090/nginx_status" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <img src="img/ssh.jpg" height="80" width="237" />
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong>Ubuntu 12.04 LTS</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="https://wiki.ubuntu.com/PrecisePangolin/ReleaseNotes" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Access
+              </th>
+              <th>
+                Port
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SSH
+                <ul>
+                  <li>user: vagrant</li>
+                  <li><a href="vagrant" download="vagrant">key file</a></li>
+                  <li>pass: vagrant</li>
+                </ul>
+              </td>
+              <td>2222</td>
+              <td>
+                <a class="btn btn-primary btn-small" href="ssh://localhost:2222" target="_blank">Go »</a>
+                <br/>
+                <small>* requires ssh:\\ protocol handler configured on system</small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <small>* SSH from <a href="https://chrome.google.com/webstore/detail/secure-shell/pnhechapfaindjhompbnflcldabbghjo?hl=en" target="_blank">within Chrome</a></small>
+        </p>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h1>
+          <a href="http://capistranorb.com/" target="_blank"><img src="img/capistrano.jpg" height="80" width="211" /></a>
+        </h1>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Offical Wiki Docs</td>
+              <td><a class="btn btn-primary btn-small" href="https://github.com/capistrano/capistrano/wiki" target="_blank">Go »</a></td>
+            </tr>
+            <tr>
+              <td>Handbook</td>
+              <td><a class="btn btn-primary btn-small" href="https://github.com/leehambley/capistrano-handbook/blob/master/index.markdown" target="_blank">Go »</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Deploys over SSH. In local repo with <code>Capfile</code>, exec:
+          <ul>
+            <li>
+              <code>bundle install --deployment</code>
+            </li>
+            <li>
+              <code>bundle exec cap deploy</code>
+            </li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <h2>
+          Additional Fx / Tools
+        </h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <strong><a href="http://nodejs.org/" target="_blank">Node v0.8.21</a><br>NPM 1.2.12</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://blog.nodejs.org/2013/02/25/node-v0-8-21-stable/" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><a href="http://www.ruby-lang.org/en/" target="_blank">Ruby 1.9.3p385</a><br>
+                  (2013-02-06 revision 39114)</strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://www.ruby-lang.org/en/news/2013/02/06/ruby-1-9-3-p385-is-released/" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><a href="https://github.com/puppetlabs/puppet" target="_blank">Puppet 3.1.0</a></strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://docs.puppetlabs.com/puppet/3/reference/whats_new.html#new-features-in-puppet-310" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><a href="https://github.com/mono" target="_blank">Mono 3.0.1</a></strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://www.mono-project.com/Release_Notes_Mono_3.0.1" target="_blank">Release Notes »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><a href="https://github.com/mono/xsp" target="_blank">Mono XSP (fastcgi) 2.10</a></strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://www.mono-project.com/ASP.NET" target="_blank">Docs »</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><a href="https://github.com/angular" target="_blank">AngularJS</a></strong>
+              </td>
+              <td>
+                <a class="btn btn-primary btn-small" href="http://docs.angularjs.org/api/" target="_blank">Docs »</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
