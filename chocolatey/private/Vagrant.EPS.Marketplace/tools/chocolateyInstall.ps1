@@ -274,7 +274,7 @@ VBoxManage cannot be found.
   Copy-Item "$(Get-CurrentDirectory)\*" -Recurse -Force
 
   $boxRegistered = vagrant box list |
-    ? { $_ -eq $boxName } |
+    ? { $_ -eq "$boxName (virtualbox)" } |
     Measure-Object |
     Select -ExpandProperty Count
   $dotVagrantExists = Test-Path '.vagrant'

@@ -18,8 +18,8 @@
     <iconUrl>https://raw.github.com/EastPoint/DevTools/master/eps-logo.png</iconUrl>
     <dependencies>
       <dependency id="PowerShell" version="3.0.20121027" />
-      <dependency id="virtualbox" version="4.2.8" />
-      <dependency id="vagrant" version="1.0.10" />
+      <dependency id="virtualbox" version="4.2.12" />
+      <dependency id="vagrant" version="1.2.2" />
     </dependencies>
     <releaseNotes>
       Copies the appropriate basebox and upgrades it using Vagrant tooling
