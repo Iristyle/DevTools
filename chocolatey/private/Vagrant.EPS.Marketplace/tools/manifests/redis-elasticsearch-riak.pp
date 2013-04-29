@@ -7,7 +7,11 @@
 # https://github.com/basho/puppet-riak/wiki/Class%5Briak%5D%3A-Parameters-and-Configuration
 class { 'riak':
   version => '1.3.0',
+  ulimit => 4096,
   cfg => {
+    riak_api => {
+       pb_backlog => 64
+    },
     riak_kv => {
       storage_backend => '__atom_riak_kv_eleveldb_backend',
       map_js_vm_count => 24,
