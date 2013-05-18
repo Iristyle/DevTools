@@ -23,31 +23,32 @@
       <dependency id="curl" version="7.28.1"/>
       <dependency id="nodejs.install" version="[0.8.22,0.8.22]"/>
       <dependency id="gitextensions" version="2.4.4"/>
-      <dependency id="EthanBrown.GitAliases" version="0.0.3"/>
+      <dependency id="EthanBrown.GitAliases" version="0.0.5"/>
       <dependency id="EthanBrown.GitExtensionsConfiguration" version="0.0.1"/>
       <!-- automatically installs latest from git zipball -->
       <dependency id="poshgit" version="0.4.0.20120717"/>
+      <dependency id="Posh-VsVars" version="0.0.2"/>
+      <dependency id="Posh-GitHub" version="0.0.1"/>
       <dependency id="diffmerge" version="3.3.2"/>
       <!-- <dependency id="git.difftool.diffmerge"/>  Error: "External packages cannot depend on packages that target projects." -->
       <dependency id="EthanBrown.GitConfiguration" version="0.0.3"/>
 <!--      <dependency id="Console2"/>  Error: "External packages cannot depend on packages that target projects." (Installing in powershell script.) -->
 <!--      <dependency id="ConEmu" version="12.4.17.1"/> --> <!-- Seems to be prompting for install directory -->   <!-- latest version is alpha -->
       <dependency id="PhantomJS" version="1.9.0"/>
-      <dependency id="FireFox" version="19.0.2"/>
+      <dependency id="FireFox" version="20.0.1"/>
       <dependency id="GoogleChrome.Canary" version="28.0.1461.0"/>
       <dependency id="EthanBrown.ChromeCanaryDevExtensions" version="0.0.2"/>
       <dependency id="SublimeText2.app" version="2.0.1.22171"/>
-      <dependency id="EthanBrown.SublimeText2.UtilPackages" version="0.1.1"/>
-      <dependency id="EthanBrown.SublimeText2.EditorPackages" version="0.1.0"/>
-      <dependency id="EthanBrown.SublimeText2.GitPackages" version="0.1.0"/>
-      <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.1.1"/>
+      <dependency id="EthanBrown.SublimeText2.UtilPackages" version="0.1.2"/>
+      <dependency id="EthanBrown.SublimeText2.EditorPackages" version="0.1.1"/>
+      <dependency id="EthanBrown.SublimeText2.GitPackages" version="0.1.1"/>
+      <dependency id="EthanBrown.SublimeText2.WebPackages" version="0.2.3"/>
       <dependency id="Growl" version="2.0.9.20130406"/>
       <dependency id="OptiPNG" version="0.7.1.20120913"/>
       <dependency id="libjpeg-turbo" version="1.2.1.201304081"/>
       <dependency id="Tunnelier" version="4.60.0"/>
       <dependency id="Ruby" version="1.9.3.37400"/>
       <dependency id="ruby.devkit" version="4.5.2.20111230"/>
-      <dependency id="Vagrant" version="1.1.5"/>
     </dependencies>
     <releaseNotes>
       Also installs: Console2 (can't use as a dependency due to Nuget issue)
