@@ -20,11 +20,11 @@ try {
   $packages = @(
     'coffee-script@1.6.2',
     'coffeelint@0.5.4',
-    'bower@0.8.5',
-    'grunt-cli@0.1.6',
+    'bower@0.9.2',
+    'grunt-cli@0.1.8',
     'http-server@0.5.3',
-    'jshint@1.1.0',
-    'codo@1.6.0',
+    'jshint@2.0.1',
+    'codo@1.7.0',
     'recess@1.1.6',
     'csslint@0.9.10'
   )
